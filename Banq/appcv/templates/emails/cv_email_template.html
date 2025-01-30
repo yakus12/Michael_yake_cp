@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV de {{ personne.nom }} {{ personne.prenom }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #2980b9;
+        }
+        h1 {
+            text-align: center;
+            font-size: 36px;
+        }
+        hr {
+            border: 1px solid #2980b9;
+            margin: 20px 0;
+        }
+        img {
+            display: block;
+            margin: 10px auto;
+            border-radius: 50%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        li strong {
+            color: #2980b9;
+        }
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container a {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .button-container a:hover {
+            background-color: #1f6fa1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CV de {{ personne.nom }} {{ personne.prenom }}</h1>
+
+        {% if photo_url %}
+            <img src="{{ photo_url }}" alt="Photo de {{ personne.nom }}" style="max-width: 150px;">
+        {% endif %}
+        <p><strong>Date de naissance :</strong> {{ personne.date_naissance }}</p>
+        <hr>
+
+        <section>
+            <h2>Expérience professionnelle</h2>
+            <ul>
+                {% for experience in cv.experiences.all %}
+                    <li>
+                        <strong>{{ experience.titre }}</strong> - {{ experience.entreprise }} 
+                        ({{ experience.date_debut }} - {{ experience.date_fin }})
+                    </li>
+                {% empty %}
+                    <li>Aucune expérience professionnelle ajoutée.</li>
+                {% endfor %}
+            </ul>
+            <div class="button-container">
+                <a href="#formation">Voir Formation</a>
+                <a href="#competences">Voir Compétences</a>
+                <a href="#langues">Voir Langues</a>
+                <a href="#loisirs">Voir Loisirs</a>
+            </div>
+        </section>
+        <hr>
+
+        <section id="formation">
+            <h2>Formation</h2>
+            <ul>
+                {% for formation in cv.formations.all %}
+                    <li>
+                        <strong>{{ formation.diplome }}</strong> - {{ formation.institution }}
+                        ({{ formation.date_debut }} - {{ formation.date_fin }})
+                    </li>
+                {% empty %}
+                    <li>Aucune formation ajoutée.</li>
+                {% endfor %}
+            </ul>
+            <div class="button-container">
+                <a href="#experience">Retour à l'expérience</a>
+                <a href="#competences">Voir Compétences</a>
+                <a href="#langues">Voir Langues</a>
+                <a href="#loisirs">Voir Loisirs</a>
+            </div>
+        </section>
+        <hr>
+
+        <section id="competences">
+            <h2>Compétences</h2>
+            <ul>
+                {% for competence in cv.competences.all %}
+                    <li>{{ competence.nom }} (Niveau : {{ competence.niveau }})</li>
+                {% empty %}
+                    <li>Aucune compétence ajoutée.</li>
+                {% endfor %}
+            </ul>
+            <div class="button-container">
+                <a href="#experience">Retour à l'expérience</a>
+                <a href="#formation">Voir Formation</a>
+                <a href="#langues">Voir Langues</a>
+                <a href="#loisirs">Voir Loisirs</a>
+            </div>
+        </section>
+        <hr>
+
+        <section id="langues">
+            <h2>Langues</h2>
+            <ul>
+                {% for langue in cv.langues.all %}
+                    <li>{{ langue.langue }} (Niveau : {{ langue.niveau }})</li>
+                {% empty %}
+                    <li>Aucune langue ajoutée.</li>
+                {% endfor %}
+            </ul>
+            <div class="button-container">
+                <a href="#experience">Retour à l'expérience</a>
+                <a href="#formation">Voir Formation</a>
+                <a href="#competences">Voir Compétences</a>
+                <a href="#loisirs">Voir Loisirs</a>
+            </div>
+        </section>
+        <hr>
+
+        <section id="loisirs">
+            <h2>Loisirs</h2>
+            <ul>
+                {% for loisir in cv.loisirs.all %}
+                    <li>{{ loisir.nom }} : {{ loisir.description }}</li>
+                {% empty %}
+                    <li>Aucun loisir ajouté.</li>
+                {% endfor %}
+            </ul>
+            <div class="button-container">
+                <a href="#experience">Retour à l'expérience</a>
+                <a href="#formation">Voir Formation</a>
+                <a href="#competences">Voir Compétences</a>
+                <a href="#langues">Voir Langues</a>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

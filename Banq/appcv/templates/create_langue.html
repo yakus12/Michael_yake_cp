@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a language</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/create_langue.css' %}">
+</head>
+<body>
+    <h1>Add a language</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="langue">Langue :</label>
+            <input type="text" name="langue" id="langue" required>
+        </div>
+        <div>
+            <label for="niveau">Level :</label>
+            <input type="text" name="niveau" id="niveau" required>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+        
+        <a href="{% url 'view_langues' %}">
+            <button type="button">View my languages</button>
+        </a>
+        
+    </form>
+</body>
+</html>

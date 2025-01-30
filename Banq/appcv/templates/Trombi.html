@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TROMBINOSCOPE</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/Trombi.css' %}">
+</head>
+<body>
+    <h1 style="text-align: center;">
+        <!--je voulais juste ajoute un image mais faite de temps-->
+        TROMBINOSCOPE
+    </h1>
+    <div class="button-container">
+        <a href="{% url 'formulaire' %}" class="btn btn-primary">Sign in</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Create Account</a>
+    </div>
+    <div class="Trombi-container">
+        {% for item in data %}
+        <div class="person-card">
+            {% if item.personne.photo and item.personne.photo.url %}
+                <a href="{% if item.premier_cv %}{% url 'cv_detail' item.premier_cv.id %}{% else %}#{% endif %}">
+                    <img src="{{ item.personne.photo.url }}" alt="Photo de {{ item.personne.prenom }} {{ item.personne.nom }}">
+                </a>
+            {% else %}
+                <p>Aucune photo</p>
+            {% endif %}
+            <p>{{ item.personne.prenom }} <br> {{ item.personne.nom }}</p>
+            {% if item.premier_cv %}
+                <a href="{% url 'cv_detail' item.premier_cv.id %}">See the CV</a>
+            {% else %}
+                <p>No resume available</p>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <p>&copy; Yakus. All rights reserved.</p>
+    </footer>
+</body>
+</html>

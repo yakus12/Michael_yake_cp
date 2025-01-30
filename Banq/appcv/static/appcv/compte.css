@@ -1,0 +1,117 @@
+/* Styles globaux */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b1b33; /* Bleu nuit */
+    color: #ffffff; /* Texte blanc */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #d6e4ff; /* Bleu clair */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #1e355e; /* Bleu légèrement plus clair */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-size: 16px;
+    color: #d6e4ff; /* Bleu clair */
+}
+
+form input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #d6e4ff; /* Bordure bleu clair */
+    border-radius: 5px;
+    background-color: #ffffff; /* Fond blanc */
+    color: #0b1b33; /* Texte bleu nuit */
+}
+
+form input:focus {
+    outline: none;
+    border-color: #007bff; /* Bleu vif */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Bleu vif */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Bleu plus sombre */
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+p.annonce {
+    color: #d6e4ff; /* Bleu clair */
+    font-size: 14px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff; /* Bleu vif */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3; /* Bleu plus sombre */
+}
+
+h2.Bienvenue {
+    color: #d6e4ff; /* Bleu clair */
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Classes spécifiques */
+.btncompte {
+    margin-top: 15px;
+    background-color: #28a745; /* Vert pour les boutons spécifiques */
+    color: white;
+}
+
+.btncompte:hover {
+    background-color: #1e7e34; /* Vert plus sombre au survol */
+}
+
+.error {
+    color: #ff4d4f; /* Rouge vif pour les messages d'erreur */
+    font-size: 14px;
+    text-align: center;
+}

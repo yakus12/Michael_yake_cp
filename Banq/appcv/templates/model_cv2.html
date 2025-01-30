@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV de {{ cv.personne.nom }} {{ cv.personne.prenom }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cv_style.css' %}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .cv-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #007bff;
+            margin-right: 20px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #007bff;
+            margin: 0;
+        }
+
+        .header p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .action-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .action-buttons button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .btn-print {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .btn-edit {
+            background: #007bff;
+            color: #fff;
+        }
+
+        .btn-email {
+            background: #ffc107;
+            color: #fff;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: #007bff;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        .section li::before {
+            content: "▪";
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        .details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .details span {
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            height: 10px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .progress-bar div {
+            background-color: #007bff;
+            height: 100%;
+            border-radius: 5px;
+        }
+
+        .langues-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .langue-item {
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cv-container">
+        <!-- Header Section -->
+        <div class="header">
+            <!-- Photo -->
+            {% if cv.personne.photo %}
+            <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.nom }}">
+            {% else %}
+            <img src="https://via.placeholder.com/100" alt="Photo par défaut">
+            {% endif %}
+            <!-- Nom et informations principales -->
+            <div>
+                <h1>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h1>
+                <p>Email : {{ cv.contact.email }}</p>
+                <p>Téléphone : {{ cv.contact.telephone }}</p>
+                <p>Adresse : {{ cv.contact.adresse }}</p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <button class="btn-print" onclick="window.print()">Imprimer</button>
+            <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                <button class="btn-edit" type="submit">Modifier</button>
+            </form>
+            <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-email" type="submit">Envoyer par email</button>
+            </form>
+            <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr ?');">Supprimer</button>
+            </form>
+        </div>
+
+        <!-- Profil Section -->
+        <div class="section">
+            <div class="section-title">Profil</div>
+            <div class="details">
+                <p><span>Date de naissance :</span> {{ cv.personne.date_naissance }}</p>
+                <p><span>Email :</span> {{ cv.contact.email }}</p>
+                <p><span>Téléphone :</span> {{ cv.contact.telephone }}</p>
+            </div>
+        </div>
+
+        <!-- Compétences Section -->
+        <div class="section">
+            <div class="section-title">Compétences</div>
+            <ul>
+                {% for competence in competences %}
+                <li>
+                    {{ competence.nom }}
+                    <div class="progress-bar">
+                        <div style="width: {{ competence.niveau }}%;"></div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Expériences Section -->
+        <div class="section">
+            <div class="section-title">Expériences professionnelles</div>
+            <ul>
+                {% for experience in experiences %}
+                <li>
+                    <strong>{{ experience.titre }}</strong> - {{ experience.entreprise }}
+                    <br>{{ experience.date_debut }} - {{ experience.date_fin }}
+                    <br><em>{{ experience.description }}</em>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Formations Section -->
+        <div class="section">
+            <div class="section-title">Formations</div>
+            <ul>
+                {% for formation in formations %}
+                <li>
+                    <strong>{{ formation.diplome }}</strong> - {{ formation.institution }}
+                    <br>{{ formation.date_debut }} - {{ formation.date_fin }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Langues Section -->
+        <div class="section">
+            <div class="section-title">Langues</div>
+            <div class="langues-section">
+                {% for langue in langues %}
+                <div class="langue-item">{{ langue.nom }} - {{ langue.niveau }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Loisirs Section -->
+        <div class="section">
+            <div class="section-title">Loisirs</div>
+            <ul>
+                {% for loisir in loisirs %}
+                <li>{{ loisir.nom }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

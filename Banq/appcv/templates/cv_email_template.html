@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Moderne</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: #fff;
+            background-color: #121212;
+            margin: 0;
+            padding: 0;
+        }
+        .cv-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #1e1e2f;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .cv-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .cv-header h1 {
+            margin: 0;
+            font-size: 32px;
+            color: #4a90e2;
+        }
+        .cv-header p {
+            font-size: 16px;
+            color: #ccc;
+        }
+        .cv-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-top: 10px;
+            border: 3px solid #4a90e2;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 22px;
+            color: #4a90e2;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+        .section-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section-content li {
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <div class="cv-header">
+            <h1>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h1>
+            <p>{{ cv.contact.email }} | {{ cv.contact.telephone }}</p>
+            {% if cv.personne.photo %}
+                <img src="{{ photo_url }}" alt="Photo de {{ cv.personne.nom }}">
+            {% else %}
+                <img src="https://via.placeholder.com/120" alt="Photo par défaut">
+            {% endif %}
+        </div>
+
+        <div class="section">
+            <div class="section-title">Expériences</div>
+            <div class="section-content">
+                <ul>
+                    {% for experience in experiences %}
+                        <li><strong>{{ experience.titre }}</strong> - {{ experience.entreprise }} ({{ experience.date_debut }} - {{ experience.date_fin }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Formations</div>
+            <div class="section-content">
+                <ul>
+                    {% for formation in formations %}
+                        <li><strong>{{ formation.diplome }}</strong> - {{ formation.institution }} ({{ formation.date_debut }} - {{ formation.date_fin }})</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Compétences</div>
+            <div class="section-content">
+                <ul>
+                    {% for competence in competences %}
+                        <li>{{ competence.nom }} - Niveau: {{ competence.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Langues</div>
+            <div class="section-content">
+                <ul>
+                    {% for langue in langues %}
+                        <li>{{ langue.langue }} - Niveau: {{ langue.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">Loisirs</div>
+            <div class="section-content">
+                <ul>
+                    {% for loisir in loisirs %}
+                        <li>{{ loisir.nom }} - {{ loisir.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

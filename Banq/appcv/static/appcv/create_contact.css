@@ -1,0 +1,113 @@
+        /* Général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0b1b33; /* Bleu nuit */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #d6e4ff; /* Texte lumineux */
+        }
+        
+        h1 {
+            text-align: center;
+            color: #d6e4ff; /* Couleur lumineuse pour le titre */
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+            font-weight: 600;
+        }
+        
+        /* Formulaire */
+        form {
+            width: 100%;
+            max-width: 400px;
+            background-color: #1e355e; /* Bleu clair nuit */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        form div {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #d6e4ff;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #5c85b1; /* Bordure subtile */
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #0b1b33; /* Fond bleu nuit */
+            color: #d6e4ff; /* Texte lumineux */
+            transition: border-color 0.3s ease;
+        }
+        
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        textarea:focus {
+            border-color: #007bff; /* Bleu vif pour le focus */
+            outline: none;
+        }
+        
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #007bff; /* Bleu vif */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #0056b3; /* Bleu vif foncé */
+        }
+        
+        /* Liens */
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        a button {
+            width: auto;
+            padding: 12px 24px;
+            background-color: #35c291; /* Vert vif */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        a button:hover {
+            background-color: #35c291; /* Vert plus foncé */
+        }
+        
+        /* Réorganisation */
+        form div:last-of-type {
+            margin-bottom: 0; /* Pas de marge pour le dernier champ */
+        }

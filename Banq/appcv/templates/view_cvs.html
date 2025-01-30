@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My CVs</title>
+    {% load static %}
+    <style>
+        
+    body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        line-height: 1.6;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: #3498db;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    ul li {
+        background-color: #34495e;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    ul li:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    strong {
+        color: #f39c12;
+    }
+
+    a {
+        color: #1abc9c;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    a:hover {
+        color: #16a085;
+    }
+
+    p {
+        text-align: center;
+        font-size: 18px;
+        margin-top: 20px;
+        color: #e74c3c;
+    }
+
+
+    </style>
+</head>
+<body>
+    <h1>My CVs</h1>
+    <!-- Afficher tous les CVs de l'utilisateur sur la page -->
+    {% if cvs %}
+        <ul>
+            {% for cv in cvs %}
+            <li>
+                <strong>Nom :</strong> {{ cv.personne.prenom }} {{ cv.personne.nom }}<br>
+                <strong>Date of birth :</strong> {{ cv.personne.date_naissance }}<br>
+                <strong>Email :</strong> {{ cv.contact.email }}<br>
+                <strong>Téléphone :</strong> {{ cv.contact.telephone }}<br>
+                <strong>Adresse :</strong> {{ cv.contact.adresse }}<br>
+                <strong>CV :</strong> <a href="{% url 'view_cv' cv.id %}">View CV</a>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No resume available.</p>
+    {% endif %}
+
+    <a href="{% url 'creation' %}">
+        <button type="button">Create a CV</button>
+    </a>
+</body>
+</html>

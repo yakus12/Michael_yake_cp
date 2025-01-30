@@ -1,0 +1,167 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Verification</title>
+    {% load static %}
+
+    <style>
+        /* Styles globaux */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0b1b33; /* Bleu nuit */
+    color: #ffffff; /* Texte blanc */
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #d6e4ff; /* Bleu clair */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #1e355e; /* Bleu légèrement plus clair */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form label {
+    font-size: 16px;
+    color: #d6e4ff; /* Bleu clair */
+}
+
+form input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #d6e4ff; /* Bordure bleu clair */
+    border-radius: 5px;
+    background-color: #ffffff; /* Fond blanc */
+    color: #0b1b33; /* Texte bleu nuit */
+}
+
+form input:focus {
+    outline: none;
+    border-color: #007bff; /* Bleu vif */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+form button {
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff; /* Bleu vif */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3; /* Bleu plus sombre */
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+p.annonce {
+    color: #d6e4ff; /* Bleu clair */
+    font-size: 14px;
+}
+
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    background-color: #007bff; /* Bleu vif */
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3; /* Bleu plus sombre */
+}
+
+h2.Bienvenue {
+    color: #d6e4ff; /* Bleu clair */
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Classes spécifiques */
+.btncompte {
+    margin-top: 15px;
+    background-color: #007bff; /* Vert pour les boutons spécifiques */
+    color: white;
+}
+
+.btncompte:hover {
+    background-color: #007bff; /* Vert plus sombre au survol */
+}
+
+.error {
+    color: #ff4d4f; /* Rouge vif pour les messages d'erreur */
+    font-size: 14px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Password Verification</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="username">Username :</label>
+            <input type="text" name="username" id="username" required>
+        </div>
+        <div>
+            <label for="password">Password :</label>
+            <input type="password" name="password" id="password" required>
+        </div>
+        <div>
+            <button type="submit">Validate</button>
+        </div>
+        {% if error_message %}
+            <p style="color:red;">{{ error_message }}</p>
+        {% endif %}
+    </form>
+
+    {% if user_authenticated %}
+        <h2 class="Bienvenue">Welcome,  {{user.username}}  </h2>
+        <!-- Afficher les formulaires ou autres informations de l'utilisateur -->
+        <a class="btncompte" href="{% url 'view_cvs' %}">My CVs</a>
+        <a class="btncompte" href="{% url 'creation' %}">Create a CV</a>
+    
+    {% endif %}
+
+    {% if user_not_found %}
+        <p class="annonce">Please make sure to create an account if you have not already done so. </p>
+        <a class="btncompte" href="{% url 'register' %}">Create Account</a>
+    {% endif %}
+</body>
+</html>
+

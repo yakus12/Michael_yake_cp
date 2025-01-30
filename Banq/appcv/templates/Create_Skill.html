@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a skill</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/Create_Skill.css' %}">
+</head>
+<body>
+    <h1>Add a skill</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="nom">Skill name :</label>
+            <input type="text" name="nom" id="nom" required>
+        </div>
+        <div>
+            <label for="niveau">Level :</label>
+            <input type="text" name="niveau" id="niveau" required>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+
+        <a href="{% url 'view_competences' %}">
+            <button type="button">View my skills</button>
+        </a>
+    </form>
+</body>
+</html>

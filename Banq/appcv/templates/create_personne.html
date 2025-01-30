@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Modify my Personal Information</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/create_personne.css' %}">
+</head>
+<body>
+    <h1>Modify my Personal Information</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="nom">Name :</label>
+        <input type="text" name="nom" id="nom" value="{{ form.nom.value|default:'' }}" required><br>
+
+        <label for="prenom">Prénom :</label>
+        <input type="text" name="prenom" id="prenom" value="{{ form.prenom.value|default:'' }}" required><br>
+
+        <label for="date_naissance">Date of birth :</label>
+        <input type="date" name="date_naissance" id="date_naissance" value="{{ form.date_naissance.value|default:'' }}" required><br>
+
+        <label for="photo">Photo :</label>
+        <input type="file" name="photo" id="photo"><br>
+
+        <button type="submit">Save</button>
+
+         <!-- Bouton pour voir les informations personnelles -->
+    <a href="{% url 'view_person' %}">
+        <button type="button">View my personal information</button>
+    </a>
+    </form>
+
+</body>
+</html>

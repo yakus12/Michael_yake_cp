@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Experiences</title>
+    <style>
+        /* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Bleu nuit foncé */
+    color: #E0E0E0; /* Blanc cassé */
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Titre principal */
+h1 {
+    color: #90CAF9; /* Bleu clair */
+    text-shadow: 1px 1px 4px #0D47A1; /* Effet de lueur */
+    margin-bottom: 20px;
+}
+
+/* Liste des expériences */
+ul {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+li {
+    background-color: #1E1E2F; /* Bleu nuit légèrement plus clair */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Titre de chaque expérience */
+li strong {
+    color: #BBDEFB; /* Bleu pâle */
+    font-size: 1.2em;
+}
+
+/* Dates */
+li em {
+    color: #90CAF9;
+    font-size: 0.9em;
+}
+
+/* Description */
+li p {
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+/* Texte alternatif */
+p {
+    text-align: center;
+    font-size: 1em;
+    color: #E0E0E0;
+}
+
+/* Boutons */
+a button {
+    background-color: #0D47A1; /* Bleu intense */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+}
+
+a button:hover {
+    background-color: #1976D2; /* Bleu plus clair au survol */
+}
+
+/* Centrage des boutons */
+a {
+    text-align: center;
+    text-decoration: none;
+}
+
+    </style>
+</head>
+<body>
+    <h1>My professional experiences</h1>
+
+    <!-- Vérifier si l'utilisateur a des expériences -->
+    {% if experiences %}
+        <ul>
+            <!-- Afficher chaque expérience dans une liste -->
+            {% for experience in experiences %}
+                <li>
+                    <strong>{{ experience.titre }}</strong><br>
+                    <em>{{ experience.date_debut }} - {% if experience.date_fin %}{{ experience.date_fin }}{% else %}En cours{% endif %}</em><br>
+                    <p>{{ experience.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any work experience yet.</p>
+    {% endif %}
+
+    <!-- Lien pour revenir à la page de création ou d'édition des expériences -->
+    <a href="{% url 'create_or_edit_experience' %}">
+        <button type="button">Add an experience</button>
+    </a>
+
+    <!-- Lien pour revenir à la page d'accueil ou à d'autres sections -->
+    <a href="{% url 'creation' %}">
+        <button type="button">Back to home</button>
+    </a>
+</body>
+</html>

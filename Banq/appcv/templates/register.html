@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #0b1b33; /* Bleu nuit */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        .container {
+            display: flex;
+            align-items: center; /* Centre verticalement */
+            justify-content: center; /* Centre horizontalement */
+            gap: 20px; /* Espacement entre le titre et le formulaire */
+            flex-direction: row; /* Aligne le titre et le formulaire sur une ligne */
+        }
+
+        form {
+            background-color: #1e355e; /* Couleur légèrement plus claire */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        form input, form button {
+            width: calc(100% - 20px);
+            margin: 10px auto;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+        }
+
+        form input {
+            background-color: #ffffff; /* Couleur de fond des champs */
+            color: #0b1b33; /* Texte sombre */
+            border: 1px solid #d6e4ff; /* Bordure subtile */
+        }
+
+        form button {
+            background-color: #007bff; /* Couleur bleu vif pour le bouton */
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #0056b3; /* Couleur plus sombre au survol */
+        }
+
+        .error {
+            color: #ff4d4f; /* Couleur rouge pour les messages d'erreur */
+            font-size: 12px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

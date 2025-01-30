@@ -1,0 +1,97 @@
+       /* Corps de la page */
+       body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #2c3e50; /* Bleu nuit */
+        color: #ecf0f1; /* Texte clair */
+    }
+
+    /* Titre principal */
+    h1 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 30px;
+        color: #3498db; /* Bleu clair */
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Formulaire */
+    form {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #34495e; /* Gris foncé */
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Label des champs */
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 18px;
+        color: #ecf0f1;
+    }
+
+    /* Champs de texte */
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #95a5a6;
+        border-radius: 8px;
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        font-size: 16px;
+    }
+
+    /* Champs focus */
+    input[type="text"]:focus,
+    textarea:focus {
+        border-color: #3498db; /* Bleu clair */
+        outline: none;
+        box-shadow: 0 0 5px #3498db;
+    }
+
+    /* Boutons */
+    button {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        background-color: #3498db; /* Bleu clair */
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+        background-color: #2980b9; /* Bleu plus foncé */
+        transform: scale(1.05);
+    }
+
+    button:active {
+        transform: scale(0.98);
+    }
+
+    /* Lien avec bouton */
+    a button {
+        margin-top: 10px;
+    }
+
+    /* Div de chaque champ */
+    div {
+        margin-bottom: 20px;
+    }
+
+    /* Ajustement des textes et marges */
+    textarea {
+        resize: vertical;
+        min-height: 100px;
+    }

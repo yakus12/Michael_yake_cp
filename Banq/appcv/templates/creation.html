@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a CV</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/creation.css' %}">
+</head>
+
+<body>
+    <h1>Create a CV</h1>
+
+    <!-- Formulaire de vérification du mot de passe -->
+    <form method="POST">
+        {% csrf_token %}
+
+        <form method="POST">
+            {% csrf_token %}
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_personne' %}'">create or modify my profile</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_contact' %}'">Create or Modify my contact</button>
+            </div>
+
+            <br> <br>
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_formation' %}'">Add a training course </button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'Create_Skill' %}'">Add a skill</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_experience' %}'">Add an experience</button>
+            </div>
+            <br> <br>
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_loisir' %}'">Add a hobby</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_langue' %}'">Add a language</button>
+            </div>
+
+            <br> <br>
+
+            <div>
+                <button type="button" onclick="window.location.href='{% url 'create_cv' %}'">Add a CV</button>
+            </div>
+
+        </form>
+        {% block content %}
+        {% endblock %}
+</body>
+
+</html>

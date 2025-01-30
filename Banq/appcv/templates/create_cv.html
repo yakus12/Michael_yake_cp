@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create/Modify a CV</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/create_cv.css' %}">
+</head>
+<body>
+    <h1>Create/Modify a CV</h1>
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Champ pour sélectionner une Personne -->
+        <label for="personne">Personne :</label>
+        <select name="personne" id="personne" required>
+            {% for personne in personnes %}
+                <option value="{{ personne.id }}" {% if form.personne.value == personne.id %}selected{% endif %}>
+                    {{ personne.prenom }} {{ personne.nom }}
+                </option>
+            {% endfor %}
+        </select>
+        <a href="{% url 'create_personne' %}"><button type="button">Add or Modify my personal information</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner un Contact -->
+        <label for="contact">Contact :</label>
+        <select name="contact" id="contact" required>
+            {% for contact in contacts %}
+                <option value="{{ contact.id }}" {% if form.contact.value == contact.id %}selected{% endif %}>
+                    {{ contact.email }}
+                </option>
+            {% endfor %}
+        </select>
+        <a href="{% url 'create_contact' %}"><button type="button">Add or Modify my contact information</button></a>
+        <br><br>
+
+        
+        <label for="id_title">CV title :</label>
+        {{ form.title }}
+        <br><br>
+
+        
+        <label for="id_design">Select a design :</label>
+        {{ form.design }}
+        <br><br>
+
+        
+        <label for="experiences">Experiences :</label>
+        <div id="experiences">
+            {% for experience in experiences %}
+                <label>
+                    <input type="checkbox" name="experiences" value="{{ experience.id }}" {% if experience.id in form.experiences.value %}checked{% endif %}>
+                    {{ experience.titre }} chez {{ experience.entreprise }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'create_experience' %}"><button type="button">Add an experience</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Formations -->
+        <label for="formations">Formations :</label>
+        <div id="formations">
+            {% for formation in formations %}
+                <label>
+                    <input type="checkbox" name="formations" value="{{ formation.id }}" {% if formation.id in form.formations.value %}checked{% endif %}>
+                    {{ formation.diplome }} à {{ formation.institution }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'create_formation' %}"><button type="button">Add training courses</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Compétences -->
+        <label for="competences">skills :</label>
+        <div id="competences">
+            {% for competence in competences %}
+                <label>
+                    <input type="checkbox" name="competences" value="{{ competence.id }}" {% if competence.id in form.competences.value %}checked{% endif %}>
+                    {{ competence.nom }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'Create_Skill' %}"><button type="button">Add my skills</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Langues -->
+        <label for="langues">Languages :</label>
+        <div id="langues">
+            {% for langue in langues %}
+                <label>
+                    <input type="checkbox" name="langues" value="{{ langue.id }}" {% if langue.id in form.langues.value %}checked{% endif %}>
+                    {{ langue.langue }} - {{ langue.niveau }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'create_langue' %}"><button type="button">Add my Languages</button></a>
+        <br><br>
+
+        <!-- Champ pour sélectionner des Loisirs -->
+        <label for="loisirs">hobby :</label>
+        <div id="loisirs">
+            {% for loisir in loisirs %}
+                <label>
+                    <input type="checkbox" name="loisirs" value="{{ loisir.id }}" {% if loisir.id in form.loisirs.value %}checked{% endif %}>
+                    {{ loisir.nom }}
+                </label><br>
+            {% endfor %}
+        </div>
+        <a href="{% url 'create_loisir' %}"><button type="button">Add hobby</button></a>
+        <br><br>
+
+        <button type="submit">Save</button>
+        <a href="{% url 'view_cvs' %}"><button class="Voircv" type="button">View my CVs</button></a>
+    </form>
+</body>
+</html>

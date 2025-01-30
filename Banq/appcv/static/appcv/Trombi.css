@@ -1,0 +1,139 @@
+body, h1, p, a, img, div {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0b1b33, #1e355e);
+    animation: gradientAnimation 10s ease infinite;
+    color: #d6e4ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #3498db;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-secondary {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #45a049;
+}
+
+.Trombi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 30px;
+}
+
+.person-card {
+    background-color: #1e355e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.person-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    background-color: #2a3f6e;
+}
+
+.person-card img {
+    width: 100%;
+    max-width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 3px solid #4CAF50;
+    transition: transform 0.3s ease;
+}
+
+.person-card img:hover {
+    transform: scale(1.1);
+}
+
+.person-card p {
+    font-size: 1.1rem;
+    color: #d6e4ff;
+    margin: 10px 0;
+}
+
+.person-card a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.person-card a:hover {
+    color: #4CAF50;
+    border-bottom: 1px solid #4CAF50;
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #1e355e;
+    color: #d6e4ff;
+    text-align: center;
+    width: 100%;
+    border-top: 2px solid #3498db;
+}

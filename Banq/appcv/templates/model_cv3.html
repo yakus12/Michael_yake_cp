@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV de {{ cv.personne.nom }} {{ cv.personne.prenom }}</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        .cv-container {
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .cv-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .cv-header img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #3498db;
+            margin-bottom: 15px;
+        }
+        .cv-header h1 {
+            font-size: 36px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .cv-header p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin: 8px 0 0;
+        }
+
+        /* Boutons d'action */
+        .action-buttons {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            gap: 10px;
+        }
+        .action-buttons button {
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .action-buttons .btn-print {
+            background-color: #27ae60;
+            color: white;
+        }
+        .action-buttons .btn-print:hover {
+            background-color: #219653;
+        }
+        .action-buttons .btn-edit {
+            background-color: #3498db;
+            color: white;
+        }
+        .action-buttons .btn-edit:hover {
+            background-color: #2980b9;
+        }
+        .action-buttons .btn-email {
+            background-color: #f39c12;
+            color: white;
+        }
+        .action-buttons .btn-email:hover {
+            background-color: #e67e22;
+        }
+        .action-buttons .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .action-buttons .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        /* Sections */
+        .section {
+            margin-bottom: 30px;
+        }
+        .section-title {
+            font-size: 24px;
+            color: #3498db;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 5px;
+        }
+        .section-content {
+            margin-top: 10px;
+        }
+        .section-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .section-content li {
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .section-content li::before {
+            content: "•";
+            color: #3498db;
+            margin-right: 10px;
+            font-size: 18px;
+        }
+
+        /* Expériences et Formations */
+        .experience-item, .formation-item {
+            margin-bottom: 20px;
+        }
+        .experience-item h3, .formation-item h3 {
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 0;
+        }
+        .experience-item p, .formation-item p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin: 5px 0;
+        }
+        .experience-item .description, .formation-item .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Compétences */
+        .competence-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .competence-wrapper p {
+            margin: 0;
+            font-size: 16px;
+            color: #34495e;
+        }
+        .progress-bar {
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            height: 10px;
+            width: 60%;
+            overflow: hidden;
+        }
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            border-radius: 8px;
+            background-color: #3498db;
+        }
+
+        /* Langues */
+        .langue-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .langue-item p {
+            margin: 0;
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        /* Loisirs */
+        .loisir-item {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Boutons d'action -->
+        <div class="action-buttons">
+            <button class="btn-print" onclick="window.print()">Imprimer</button>
+            <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                <button class="btn-edit" type="submit">Modifier</button>
+            </form>
+            <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-email" type="submit">Envoyer par email</button>
+            </form>
+            <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Supprimer</button>
+            </form>
+        </div>
+
+        <!-- En-tête du CV -->
+        <div class="cv-header">
+            {% if cv.personne.photo %}
+                <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            {% else %}
+                <img src="https://via.placeholder.com/120" alt="Photo par défaut">
+            {% endif %}
+            <h1>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h1>
+            <p>{{ cv.contact.email }} | {{ cv.contact.telephone }}</p>
+        </div>
+
+        <!-- Section Expériences -->
+        <div class="section">
+            <div class="section-title">Expériences professionnelles</div>
+            <div class="section-content">
+                {% for experience in experiences %}
+                    <div class="experience-item">
+                        <h3>{{ experience.titre }}</h3>
+                        <p>{{ experience.entreprise }} | {{ experience.date_debut }} - {{ experience.date_fin }}</p>
+                        <p class="description">{{ experience.description }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section Formations -->
+        <div class="section">
+            <div class="section-title">Formations</div>
+            <div class="section-content">
+                {% for formation in formations %}
+                    <div class="formation-item">
+                        <h3>{{ formation.diplome }}</h3>
+                        <p>{{ formation.institution }} | {{ formation.date_debut }} - {{ formation.date_fin }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section Compétences -->
+        <div class="section">
+            <div class="section-title">Compétences</div>
+            <div class="section-content">
+                {% for competence in competences %}
+                    <div class="competence-wrapper">
+                        <p>{{ competence.nom }}</p>
+                        <div class="progress-bar">
+                            <span style="width: {{ competence.niveau }}%;"></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section Langues -->
+        <div class="section">
+            <div class="section-title">Langues</div>
+            <div class="section-content">
+                {% for langue in langues %}
+                    <div class="langue-item">
+                        <p>{{ langue.langue }}</p>
+                        <div class="progress-bar">
+                            <span style="width: {{ langue.niveau }}%;"></span>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Section Loisirs -->
+        <div class="section">
+            <div class="section-title">Loisirs</div>
+            <div class="section-content">
+                {% for loisir in loisirs %}
+                    <span class="loisir-item">{{ loisir.nom }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

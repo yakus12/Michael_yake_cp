@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #001f3f; /* Bleu nuit */
+    color: #ffffff;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+form {
+    background-color: #002b5c;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #aad4ff; /* Bleu clair pour le texte des labels */
+}
+
+input[type="text"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #004080; /* Contours bleu foncé */
+    border-radius: 4px;
+    background-color: #003366; /* Bleu nuit plus clair */
+    color: #ffffff;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #00509e; /* Bleu vif */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0073e6; /* Bleu plus lumineux au survol */
+}
+
+a button {
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #004080; /* Boutons supplémentaires plus foncés */
+}
+
+a button:hover {
+    background-color: #00509e; /* Survol des boutons */
+}
+
+div {
+    margin-bottom: 15px;
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - {{ cv.personne.nom }} {{ cv.personne.prenom }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset de base */
+        body, h1, h2, h3, p, ul, li {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Conteneur principal */
+        .cv-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            background-color: #ffffff;
+            display: flex;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* Colonne de gauche (Informations personnelles) */
+        .left-column {
+            flex: 1;
+            background-color: #007bff;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .left-column img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 20px;
+        }
+
+        .left-column h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .left-column p {
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .left-column .contact-info {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .left-column .contact-info p {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .left-column .contact-info i {
+            margin-right: 10px;
+        }
+
+        /* Colonne de droite (Détails du CV) */
+        .right-column {
+            flex: 2;
+            padding: 30px;
+        }
+
+        .right-column h2 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+
+        .right-column .section {
+            margin-bottom: 25px;
+        }
+
+        .right-column .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .right-column .section li {
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        .right-column .section li::before {
+            content: "▹";
+            color: #007bff;
+            margin-right: 8px;
+        }
+
+        /* Boutons d'action */
+        .action-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .action-buttons button {
+            padding: 10px 20px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            margin: 0 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .action-buttons .btn-print {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .action-buttons .btn-edit {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .action-buttons .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .action-buttons .btn-email {
+            background-color: #ffc107;
+            color: white;
+        }
+
+        .action-buttons button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="cv-container">
+        <!-- Colonne de gauche -->
+        <div class="left-column">
+            <!-- Photo de profil -->
+            {% if cv.personne.photo %}
+                <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            {% else %}
+                <img src="https://via.placeholder.com/120" alt="Photo par défaut">
+            {% endif %}
+
+            <h1>{{ cv.personne.nom }} {{ cv.personne.prenom }}</h1>
+            <p>{{ cv.personne.titre }}</p>
+
+            <!-- Informations de contact -->
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> {{ cv.contact.email }}</p>
+                <p><i class="fas fa-phone"></i> {{ cv.contact.telephone }}</p>
+                <p><i class="fas fa-map-marker-alt"></i> {{ cv.contact.adresse }}</p>
+            </div>
+        </div>
+
+        <!-- Colonne de droite -->
+        <div class="right-column">
+            <!-- Boutons d'action -->
+            <div class="action-buttons">
+                <button class="btn-print" onclick="window.print()">Print</button>
+                <form action="{% url 'edit_cv' cv.id %}" method="GET" style="display:inline;">
+                    <button class="btn-edit" type="submit">Modify</button>
+                </form>
+                <form action="{% url 'send_cv_email' cv.id %}" method="GET" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn-email" type="submit">Send by email</button>
+                </form>
+                <form action="{% url 'delete_cv' cv.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button class="btn-delete" type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce CV ?');">Delete</button>
+                </form>
+            </div>
+
+            <!-- Expériences professionnelles -->
+            <div class="section">
+                <h2>Expériences</h2>
+                <ul>
+                    {% for experience in experiences %}
+                        <li>
+                            <strong>{{ experience.titre }}</strong> - {{ experience.entreprise }}<br>
+                            <em>{{ experience.date_debut }} - {{ experience.date_fin }}</em><br>
+                            {{ experience.description }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Formations -->
+            <div class="section">
+                <h2>Formations</h2>
+                <ul>
+                    {% for formation in formations %}
+                        <li>
+                            <strong>{{ formation.diplome }}</strong> - {{ formation.institution }}<br>
+                            <em>{{ formation.date_debut }} - {{ formation.date_fin }}</em>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Compétences -->
+            <div class="section">
+                <h2>Compétences</h2>
+                <ul>
+                    {% for competence in competences %}
+                        <li>{{ competence.nom }} - Niveau: {{ competence.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Langues -->
+            <div class="section">
+                <h2>Langues</h2>
+                <ul>
+                    {% for langue in langues %}
+                        <li>{{ langue.langue }} - Niveau: {{ langue.niveau }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Loisirs -->
+            <div class="section">
+                <h2>Loisirs</h2>
+                <ul>
+                    {% for loisir in loisirs %}
+                        <li>{{ loisir.nom }} - {{ loisir.description }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

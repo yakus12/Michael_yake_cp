@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV de {{ cv.personne.prenom }} {{ cv.personne.nom }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/cv_detail.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            {% if cv.personne.photo %}
+                <img src="{{ cv.personne.photo.url }}" alt="Photo de {{ cv.personne.prenom }} {{ cv.personne.nom }}">
+            {% else %}
+                <img src="https://via.placeholder.com/120" alt="Photo par défaut">
+            {% endif %}
+            <h1>{{ cv.personne.prenom }} {{ cv.personne.nom }}</h1>
+            <h2>{{ cv.personne.titre_poste }}</h2>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="section">
+            <h3>Informations de contact</h3>
+            <ul>
+                <li><strong>Email :</strong> {{ cv.contact.email }}</li>
+                <li><strong>Téléphone :</strong> {{ cv.contact.telephone }}</li>
+                <li><strong>Adresse :</strong> {{ cv.contact.adresse }}</li>
+            </ul>
+        </div>
+
+        <!-- Formations -->
+        <div class="section">
+            <h3>Formations</h3>
+            {% if cv.formations.exists %}
+                <ul>
+                    {% for formation in cv.formations.all %}
+                        <li>
+                            <strong>{{ formation.diplome }}</strong> à {{ formation.etablissement }}<br>
+                            <small>{{ formation.date_debut }} - {{ formation.date_fin }}</small><br>
+                            <p>{{ formation.description }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune formation renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Professional Experience -->
+        <div class="section">
+            <h3>Expériences professionnelles</h3>
+            {% if cv.experiences.exists %}
+                <ul>
+                    {% for experience in cv.experiences.all %}
+                        <li>
+                            <strong>{{ experience.titre }}</strong> chez {{ experience.entreprise }}<br>
+                            <small>{{ experience.date_debut }} - {{ experience.date_fin|default:"Présent" }}</small><br>
+                            <p>{{ experience.description }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune expérience professionnelle renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Compétences -->
+        <div class="section">
+            <h3>Compétences</h3>
+            {% if cv.competences.exists %}
+                <ul>
+                    {% for competence in cv.competences.all %}
+                        <li class="skills-bar">
+                            <span>{{ competence.nom }}</span>
+                            <div class="bar">
+                                <div class="progress" style="width: {{ competence.niveau }}%;"></div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Aucune compétence renseignée.</p>
+            {% endif %}
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>@Yakus {{ cv.date_creation|date:"d/m/Y" }}</p>
+        </div>
+    </div>
+</body>
+</html>

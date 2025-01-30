@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Contact Information</title>
+    <style>
+        /* Général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0b1b33; /* Bleu nuit */
+            margin: 0;
+            padding: 0;
+            color: #d6e4ff; /* Texte lumineux */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #d6e4ff;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        strong {
+            color: #007bff; /* Bleu vif pour les titres */
+        }
+
+        .container {
+            background-color: #1e355e; /* Bleu clair nuit */
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            width: 100%;
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .no-info {
+            color: #ff4d4f; /* Rouge doux pour signaler l'absence de données */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>My Contact Information</h1>
+    <div class="container">
+        {% if contact %}
+            <p><strong>Email :</strong> {{ contact.email }}</p>
+            <p><strong>Telephone :</strong> {{ contact.telephone }}</p>
+            <p><strong>Address :</strong> {{ contact.adresse }}</p>
+        {% else %}
+            <p class="no-info">No contact information available.</p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'creation' %}">
+        <button type="button">Back to home</button>
+    </a>
+</body>
+</html>

@@ -1,0 +1,73 @@
+
+/* Reset de base */
+body, h1, form, button {
+margin: 0;
+padding: 0;
+font-family: 'Arial', sans-serif;
+}
+
+/* Styles globaux */
+body {
+background-color: #0b1b33; /* Couleur de base */
+color: #d6e4ff; /* Couleur de texte */
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 100vh;
+padding: 20px;
+}
+
+/* Titre principal */
+h1 {
+font-size: 2.5rem;
+color: #3498db; /* Couleur contrastée pour le titre */
+margin-bottom: 30px;
+margin-top: 10%;
+text-transform: uppercase;
+text-align: center;
+}
+
+/* Formulaire */
+form {
+background-color: #1e355e; /* Fond du formulaire */
+padding: 30px 20px;
+border-radius: 12px;
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+width: 100%;
+max-width: 500px;
+text-align: center;
+}
+
+/* Boutons */
+form div {
+margin-bottom: 20px;
+}
+
+button {
+background-color: #3498db; /* Couleur bleu vif */
+color: white;
+padding: 12px 20px;
+font-size: 1rem;
+border: none;
+border-radius: 8px;
+cursor: pointer;
+width: 100%;
+transition: all 0.3s ease;
+text-transform: capitalize;
+font-weight: bold;
+}
+
+button:hover {
+background-color: #2980b9; /* Couleur plus sombre au survol */
+}
+
+button:focus {
+outline: none;
+box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
+}
+
+/* Espacement entre les sections */
+form br {
+display: none; /* Masque les <br> pour uniformiser le design */
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ajouter/Modifier mes Informations de Contact</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/create_contact.css' %}">
+</head>
+<body>
+    <h1>Change my Contact Information</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="email">Email :</label>
+        <input type="email" name="email" id="email" value="{{ form.email.value|default:'' }}" required><br>
+
+        <label for="telephone">Telephone :</label>
+        <input type="text" name="telephone" id="telephone" value="{{ form.telephone.value|default:'' }}"><br>
+
+        <label for="adresse">Adress :</label>
+        <textarea name="adresse" id="adresse">{{ form.adresse.value|default:'' }}</textarea><br>
+
+        <button type="submit">Save</button>
+
+ 
+    <a href="{% url 'view_contact' %}">
+        <button type="button">See my contact information</button>
+    </a>
+    </form>
+
+   
+</body>
+</html>

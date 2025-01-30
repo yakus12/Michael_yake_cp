@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a hobby</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'appcv/create_loisir.css' %}">
+    
+</head>
+<body>
+    <h1>Add a hobby</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div>
+            <label for="nom">Hobby name :</label>
+            <input type="text" name="nom" id="nom" required>
+        </div>
+        <div>
+            <label for="description">Description :</label>
+            <textarea name="description" id="description" required></textarea>
+        </div>
+        <div>
+            <button type="submit">Add</button>
+        </div>
+        <a href="{% url 'view_hobbies' %}">
+            <button type="button">View my hobbies</button>
+        </a>
+        
+    </form>
+</body>
+</html>

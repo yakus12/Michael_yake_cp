@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My training courses</title>
+
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212; /* Bleu nuit */
+            color: #E0E0E0; /* Blanc cassé */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        /* Titre principal */
+        h1 {
+            color: #90CAF9; /* Bleu clair */
+            text-shadow: 1px 1px 4px #0D47A1; /* Effet de lueur */
+            margin-bottom: 20px;
+        }
+    
+        /* Liste des formations */
+        ul {
+            list-style: none;
+            padding: 0;
+            width: 100%;
+            max-width: 600px;
+        }
+    
+        li {
+            background-color: #1E1E2F; /* Bleu nuit légèrement plus clair */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+    
+        /* Nom de la formation */
+        li strong {
+            font-size: 18px;
+            color: #BBDEFB; /* Bleu pâle */
+        }
+    
+        /* Dates */
+        li em {
+            color: #90CAF9; /* Bleu clair */
+            display: block;
+            margin: 5px 0;
+        }
+    
+        /* Description */
+        li p {
+            margin: 0;
+            color: #B0BEC5; /* Gris clair */
+            font-size: 14px;
+        }
+    
+        /* Boutons */
+        button {
+            background-color: #0D47A1; /* Bleu intense */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+    
+        button:hover {
+            background-color: #1976D2; /* Bleu plus clair */
+        }
+    
+        /* Liens contenant les boutons */
+        a {
+            text-decoration: none;
+        }
+    
+        /* Texte alternatif */
+        p {
+            text-align: center;
+            margin-top: 20px;
+            color: #CFD8DC; /* Gris très clair */
+        }
+    </style>
+    
+</head>
+<body>
+    <h1>My training courses</h1>
+
+    {% if formations %}
+        <ul>
+            {% for formation in formations %}
+                <li>
+                    <strong>{{ formation.nom }}</strong><br>
+                    <em>{{ formation.date_debut }} - {{ formation.date_fin }}</em><br>
+                    <p>{{ formation.description }}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't added any training yet.</p>
+    {% endif %}
+
+    <a href="{% url 'create_or_edit_formation' %}">
+        <button type="button">Add a training course</button>
+    </a>
+
+    <a href="{% url 'creation' %}">
+        <button type="button">Back to home</button>
+    </a>
+    
+</body>
+</html>
